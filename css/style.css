@@ -172,3 +172,94 @@ i.fa-star {
   background-color: rgba(0, 0, 0, 0.5);
   border: 5px solid rgba(1, 88, 154, 0.5);
 }
+.app_header-inner {
+  background-color: rgba(0, 0, 0, 0.5);
+  border: 5px solid rgba(1, 88, 154, 0.5);
+}
+.app__count {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+.app__text {
+  font-style: 18px;
+}
+.results .app__body {
+  justify-content: space-between;
+}
+.app_results-inner {
+  color: white;
+  padding: 20px;
+}
+.results__title {
+  text-transform: uppercase;
+  font-style: 30px;
+  text-align: center;
+  margin-bottom: 20px;
+  padding-top: 20px;
+}
+.results__img {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.results__img img {
+  width: 250px;
+}
+.results__text-box {
+  margin-bottom: 20px;
+  font-size: 16px;
+  line-height: 20px;
+}
+.results__text {
+  margin-bottom: 20px;
+}
+.app.results {
+  animation: none;
+  background-size: cover;
+  background-position: center center;
+}
+.app.results[data-race="zerg"] {
+  background-image: url(../img/zerg_bg.jpg);
+}
+.app.results[data-race="primal"] {
+  background-image: url(../img/primal_bg.jpg);
+}
+.app.results[data-race="terran"] {
+  background-image: url(../img/terran_bg.jpg);
+}
+.app.results[data-race="infested"] {
+  background-image: url(../img/infested_bg.jpg);
+}
+.app.results[data-race="protoss"] {
+  background-image: url(../img/protoss_bg.jpg);
+}
+.app.results[data-race="taldarim"] {
+  background-image: url(../img/taldarim_bg.jpg);
+  background-position: 40% 0;
+}
+.app.results[data-race="hybrid"] {
+  background-image: url(../img/hybrid_bg.jpg);
+  background-position: 45% 0;
+}
+.btn__zerg {
+  background-color: #762877;
+}
+.btn__primal {
+  background-color: #56a725;
+}
+.btn__protoss {
+  background-color: #fce356;
+  color: black;
+}
+.btn__taldarim {
+  background-color: #9d0101;
+}
+.btn__terran {
+  background-color: #da8618;
+}
+.btn__infested {
+  background-color: #f5b673;
+  color: black;
+}
+.btn__hybrid {
+  background-color: #fc7654;
+}
