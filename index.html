@@ -40,10 +40,6 @@
       </div>
 
       <div class="app achivments" v-show="showAchivments">
-        <div class="app__header-inner">
-          <div class="app__count"># 1</div>
-          <div class="app__text">Текст вопроса</div>
-        </div>
         <div class="app__body">
           <div class="app__body-inner">
             <h2 class="app__body-title">
@@ -88,14 +84,21 @@
       </div>
 
       <div class="app" v-show="showQuestions">
-        <div class="app__header-inner">
-          <div class="app__count"># 1</div>
-          <div class="app__text">Текст вопроса</div>
+        <div class="app__header">
+          <div class="app__header-inner">
+            <div class="app__count">#{{ number+1 }}</div>
+            <div class="app__text">{{ questions[number][0]}}</div>
+          </div>
         </div>
         <div class="app__body">
-          <div class="app__btn">
-            <div class="app_btn-text">Ответ 1</div>
-          </div>
+          <!-- цикл -->
+          <button
+            class="app__btn"
+            v-for="(answer, i) in questions[number][1]"
+            @click="nextQuestions(questions[number[2][i]])"
+          >
+            <div class="app_btn-text">{{answer}}</div>
+          </button>
         </div>
       </div>
 
@@ -248,6 +251,15 @@
             this.showQuestions = false;
             this.showResult = true;
             this.resultRace = race;
+          },
+          nextQuestions(answer) {
+            if (this.number == 24) {
+              this.number = 0;
+              //this.endGame();
+            } else {
+              this.number++;
+            }
+            eval(answer);
           },
         },
       });
