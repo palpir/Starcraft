@@ -16,17 +16,17 @@
           <img src="img/logo.png" class="app__logo" />
         </div>
         <div class="app__body">
-          <button class="app__btn">
+          <button class="app__btn" @click="goToQuestions">
             <i class="fa fa-play-circle-o" area-hidden="true">
               <div class="app__btn-text">Начать</div>
             </i>
           </button>
-          <button class="app__btn">
+          <button class="app__btn" @click="goToAchivments">
             <i class="fa fa-trophy" area-hidden="true">
               <div class="app__btn-text">Достижения</div>
             </i>
           </button>
-          <button class="app__btn">
+          <button class="app__btn" @click="goToSocial">
             <i class="fa fa-user" area-hidden="true">
               <div class="app__btn-text">Автор</div>
             </i>
@@ -40,6 +40,10 @@
       </div>
 
       <div class="app achivments" v-show="showAchivments">
+        <div class="app__header-inner">
+          <div class="app__count"># 1</div>
+          <div class="app__text">Текст вопроса</div>
+        </div>
         <div class="app__body">
           <div class="app__body-inner">
             <h2 class="app__body-title">
@@ -65,7 +69,7 @@
               </div>
             </div>
             <div class="app__body-middle">
-              <div class="app_result">
+              <div class="app__result">
                 <div class="app__result-score">
                   <i class="fa fa-star"></i>
                   <div class="app__result-count">150</div>
@@ -117,7 +121,7 @@
             <i class="fa fa-youtube" aria-hidden="true"></i>
             <div class="app__btn-text">Youtube</div>
           </a>
-          <button class="app__btn btn__back">
+          <button class="app__btn btn__back" @click="goToMain">
             <i class="fa fa-reply" aria-hidden="true"></i>
           </button>
         </div>
@@ -125,7 +129,7 @@
 
       <div class="app results" v-show="showResult" data-race="zerg">
         <div class="app__body">
-          <div class="app_results-inner">
+          <div class="app__results-inner">
             <div class="results__title">Зерг</div>
             <div class="results__img">
               <img src="/img/zerg_logo.png" />
@@ -193,6 +197,58 @@
           questions: questions,
           results: results,
           resultRace: "infested",
+        },
+        //методы
+        methods: {
+          goToMain() {
+            (this.showMain = true),
+              (this.showSocial = false),
+              (this.showAchivments = false),
+              (this.showQuestions = false),
+              (this.showResult = false);
+          },
+          goToSocial() {
+            (this.showMain = false),
+              (this.showSocial = true),
+              (this.showAchivments = false),
+              (this.showQuestions = false),
+              (this.showResult = false);
+          },
+          goToAchivments() {
+            if (this.totalGames > 0) {
+              (this.showMain = false),
+                (this.showSocial = false),
+                (this.showAchivments = true),
+                (this.showQuestions = false),
+                (this.showResult = false);
+            } else {
+              //если нет сыгранной игры
+              this.goToQuestions();
+            }
+          },
+          goToQuestions() {
+            //обнуляем  переменные
+            this.score = {
+              zerg: 0,
+              primal: 0,
+              protoss: 0,
+              taldarim: 0,
+              terran: 0,
+            };
+            this.showMain = false;
+            this.showSocial = false;
+            this.showAchivments = false;
+            this.showQuestions = true;
+            this.showResult = false;
+          },
+          goToResults(race) {
+            this.showMain = false;
+            this.showSocial = false;
+            this.showAchivments = false;
+            this.showQuestions = false;
+            this.showResult = true;
+            this.resultRace = race;
+          },
         },
       });
     </script>

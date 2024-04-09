@@ -137,7 +137,7 @@ i.fa {
 .app__body-middle {
   margin-bottom: 18px;
 }
-.app_result {
+.app__result {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -172,21 +172,29 @@ i.fa-star {
   background-color: rgba(0, 0, 0, 0.5);
   border: 5px solid rgba(1, 88, 154, 0.5);
 }
-.app_header-inner {
+.app__header-inner {
   background-color: rgba(0, 0, 0, 0.5);
   border: 5px solid rgba(1, 88, 154, 0.5);
+  text-align: center;
+  min-height: 247px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 10px;
 }
 .app__count {
   font-size: 24px;
   margin-bottom: 10px;
+  color: white;
 }
 .app__text {
   font-style: 18px;
+  color: white;
 }
 .results .app__body {
   justify-content: space-between;
 }
-.app_results-inner {
+.app__results-inner {
   color: white;
   padding: 20px;
 }
