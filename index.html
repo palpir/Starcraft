@@ -49,33 +49,41 @@
             <div class="app__body-top">
               <div class="app__card">
                 <div class="app__card-text">Счет</div>
-                <div class="app__card-count">0</div>
+                <div class="app__card-count">{{ totalScore }}</div>
               </div>
               <div class="app__card">
                 <div class="app__card-text">Открыто рас</div>
-                <div class="app__card-count">0</div>
+                <div class="app__card-count">{{ openRaces}}</div>
               </div>
               <div class="app__card">
-                <div class="app__card-text">Всего игр</div>
-                <div class="app__card-count">0</div>
+                <div class="app__card-text">Количество игр</div>
+                <div class="app__card-count">{{totalGames}}</div>
               </div>
               <div class="app__card">
                 <div class="app__card-text">Любимая раса</div>
-                <div class="app__card-count">0</div>
+                <div class="app__card-count">{{favoriteRace}}</div>
               </div>
             </div>
             <div class="app__body-middle">
-              <div class="app__result">
+              <div
+                class="app__result"
+                v-for="(race, k) in results"
+                v-show="showResultRace[k]"
+                @click="goToResult(k)"
+              >
                 <div class="app__result-score">
-                  <i class="fa fa-star"></i>
-                  <div class="app__result-count">150</div>
+                  <i class="fa fa-star" aria-hidden="true"></i>
+                  <div class="app__result-count">{{ race.points }}</div>
                 </div>
-                <div class="app__result-name">Зерг</div>
-                <div class="app__result-amount">5</div>
+                <div class="app__result-name">{{ race.name }}</div>
+                <div class="app__result-amount">{{ totalGame[k] }}</div>
               </div>
             </div>
             <div class="app__body-bottom">
-              <button class="app__btn btn__back btn__achivment">
+              <button
+                class="app__btn btn__back btn__achivment"
+                @click="goToMain"
+              >
                 <i class="fa fa-reply" aria-hidden="true"></i>
               </button>
             </div>
@@ -197,8 +205,8 @@
                 hybrid: 0,
               },
           //кол-во матчей
-          totalGames: localStorage.getItem("sc2TotalGame")
-            ? localStorage.getItem("sc2TotalGame")
+          totalGames: localStorage.getItem("sc2TotalGames")
+            ? localStorage.getItem("sc2TotalGames")
             : 0,
           questions: questions,
           results: results,
@@ -327,6 +335,43 @@
               "sc2TotalGame",
               JSON.stringify(this.totalGame)
             );
+          },
+        },
+        //вычисляемое свойство
+        computed: {
+          totalScore() {
+            let score = 0;
+            for (let i in this.totalGame) {
+              score += this.totalGame[i] * results[i].points;
+            }
+            return score;
+          },
+          openRaces() {
+            let count = 0;
+            for (let i in this.totalGame) {
+              if (this.totalGame[i] > 0) count++;
+            }
+            return count;
+          },
+          favoriteRace() {
+            let max = "zerg";
+            for (let i in this.totalGame) {
+              if (this.totalGame[i] > this.totalGame[max]) {
+                max = i;
+              }
+            }
+            return results[max].name;
+          },
+          showResultRace() {
+            return {
+              zerg: this.totalGame.zerg > 0 ? true : false,
+              primal: this.totalGame.primal > 0 ? true : false,
+              protoss: this.totalGame.protoss > 0 ? true : false,
+              taldarim: this.totalGame.taldarim > 0 ? true : false,
+              terran: this.totalGame.terran > 0 ? true : false,
+              infested: this.totalGame.infested > 0 ? true : false,
+              hybrid: this.totalGame.hybrid > 0 ? true : false,
+            };
           },
         },
       });
